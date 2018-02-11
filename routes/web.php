@@ -16,7 +16,13 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('about', 'PagesController@getAbout');
 
 Route::get('contact', 'PagesController@getContact');
+Route::resource('kost', 'KostController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin/kost/create', 'KostController@create');
+Route::get('/admin/kost', 'KostController@index');
+Route::get('/landing', 'HomeController@index')->name('home');
+
+Route::get('/admin', 'KostController@index')->name('home');
