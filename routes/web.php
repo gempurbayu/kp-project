@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', 'PagesController@getIndex');
+Route::get('logout', function (){
+Auth::logout();
+return redirect('/');
+
+});
+
+Route::get('/', 'DaftarController@Index');
 
 Route::get('about', 'PagesController@getAbout');
 
@@ -22,6 +28,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/kost/create', 'KostController@create');
+Route::post('/admin/kost/create', 'KostController@store');
 Route::get('/admin/kost', 'KostController@index');
 Route::get('/landing', 'HomeController@index')->name('home');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kost;
+use Image;
 
 class KostController extends Controller
 {
@@ -18,7 +19,7 @@ class KostController extends Controller
      */
     public function index()
     {
-        $kost = Kost::Latest()->paginate(5);;
+        $kost = Kost::Latest()->paginate(5);
         return view('admin.show',compact('kost'))->with([
      'kost' => $kost]);
     }
@@ -43,22 +44,40 @@ class KostController extends Controller
      */
     public function store(Request $request)
     {
-            Kost::create([
-            'nama' => request('nama'),
-            'nama_pemilik' => request('nama_pemilik'),
-            'nohp' => request('nohp'),
-            'alamat' => request('alamat'),
-            'harga' => request('harga'),
-            'tipe' => request('tipe'),
-            'fasilitas' => request('fasilitas'),
-            'jangka_waktu' => request('jangka_waktu'),
-            'panjang' => request('panjang'),
-            'lebar' => request('lebar'),  
-            'sisa_kamar' => request('sisa_kamar'),
-            'jumlah_kamar' => request('jumlah_kamar'),
-            'deskripsi' => request('deskripsi'),    
-        ]);
-        return redirect()->view('admin.admin');
+
+        $this->validate($request, [
+
+        'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg,JPG',
+
+    ]);
+
+            $kost = new Kost();
+        $kost->nama = $request->get('nama');
+        $kost->nama_pemilik = $request->get('nama_pemilik');
+        $kost->nohp = $request->get('nohp');
+        $kost->alamat = $request->get('alamat');
+        $kost->harga = $request->get('harga');
+        $kost->tipe = $request->get('tipe');
+        $kost->fasilitas = $request->get('fasilitas');
+        $kost->jangka_waktu = $request->get('jangka_waktu');
+        $kost->panjang = $request->get('panjang');
+        $kost->lebar = $request->get('lebar');
+        $kost->sisa_kamar = $request->get('sisa_kamar');
+        $kost->jumlah_kamar = $request->get('jumlah_kamar');
+        $kost->deskripsi = $request->get('deskripsi');
+
+       if($request->hasFile('images')){
+            $images = $request->file('images');
+            $filename = time() . '.' . $images->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($images)->resize(800, 400)->save($location);
+
+            $kost->images = $filename;
+        }
+            $kost->save();
+
+                return redirect('admin/kost/');
+
     }
 
     /**
@@ -107,7 +126,7 @@ class KostController extends Controller
     {
         $kost = Kost::find($id);
         $kost->delete();
-        return redirect('admin.show')->with([
+        return redirect('/admin/kost')->with([
      'kost' => $kost]);
     }
 }

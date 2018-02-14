@@ -23,6 +23,7 @@
                   <th>Fasilitas</th>
                   <th>Luas</th>
                   <th>Jumlah Kamar</th>
+                  <th>Image</th>
                   <th>Deskripsi</th>
                   <th>Action</th>
                 </tr>
@@ -39,6 +40,9 @@
                     <td>{{$kosts->fasilitas}}</td>
                     <td>{{$kosts->panjang}} X {{$kosts->lebar}}</td>
                     <td>{{$kosts->sisa_kamar}} / {{$kosts->jumlah_kamar}}</td>
+                    <td>
+                    <img src="{{ url('images/'.$kosts->images)}}" id="showimages" style="max-width:100px;max-height:50px;float:left;">
+                    </td>
                     <td>{{$kosts->deskripsi}}</td>
                   <td>
                     {!! Form::open(['method' => 'DELETE','route' => ['kost.destroy', $kosts->id],'style'=>'display:inline']) !!}

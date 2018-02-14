@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylelanding.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
 </head>
 <body>

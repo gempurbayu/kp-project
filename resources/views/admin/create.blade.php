@@ -10,7 +10,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-				<form action="{{ route('kost.store')}}" method="post" class="form-horizontal">
+				<form action="{{ route('kost.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
 						{{ csrf_field() }}
 
 						<div class="col-xs-6 col-sm-6 col-md-6">
@@ -121,6 +121,15 @@
 						</div>
 						</div>
 
+						<div class="form-group col-xs-12 col-sm-12 col-md-12">
+		                  <label class="col-md-2">Gambar</label>
+		                  <div class="col-md-4">
+		                  <img src="http://placehold.it/100x100" id="showimages" style="max-width:200px;max-height:200px;float:left;"/>
+		                  </div>
+		                  <div class="col-md-8">
+		                 	<input type="file" name="images" id="inputimages">
+		                  </div>
+	                	</div>
 
 						<div class="form-group col-xs-12 col-sm-12 col-md-12">
 		                  <label class="col-md-2">Deskripsi</label>

@@ -27,6 +27,7 @@ class CreateKostTable extends Migration
             $table->integer('lebar');
             $table->integer('sisa_kamar');
             $table->integer('jumlah_kamar');
+            $table->string('images')->nullabel();
             $table->string('deskripsi');
             $table->timestamps();
         });
