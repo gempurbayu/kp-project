@@ -88,6 +88,8 @@
                     <li class="active"><a href="index.html" style="color: white;">Home <span class="sr-only">(current)</span></a></li>
                     <li><a href="listkost.html" style="color: white;">List Kost</a></li>
                     <li><a href="#" style="color: white;">Tentang Kami</a></li>
+                    @guest
+                    @else
                     <li><a href="{{ route('logout') }}" style="color: white" 
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -97,6 +99,7 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form></li>
+                    @endguest
                 </ul>
             </div>
         </div>
@@ -111,23 +114,33 @@
                     <div class="btn-group">
 
                         <label>Cari kost</label>
-                        <p><input class="form-control" type="text" style="margin-right: 10px;" name="" placeholder="Nama Kost"></p>
-
+                        <br>
                         <label>Harga</label>
                         <p>min<input class="form-control" type="text" style="margin-right: 10px;" name="" placeholder="Rp."></p>
                         <p>max<input class="form-control" type="text" style="margin-right: 10px;" name="" placeholder="Rp."></p>
 
-                        <label>Jangka waktu</li></label>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">Harian</p>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">Bulanan</p>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">Semesteran</p>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">Tahunan</p>
+                        <div class="form-group">
+                          <label for="harga">Tipe Kost :</label>
+                          <select name="tipe" id="" class="form-control" >
+                              <option value="" disabled selected>Tipe Kost</option>
+                              <option value="Pria">Pria</option>
+                              <option value="Wanita">Wanita</option>
+                              <option value="Wanita & Wanita">Pria & Wanita</option>
+                            </select>
+                        </div>
 
-                        <label>Fasilitas kost</label>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">1</p>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">2</p>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">3</p>
-                        <p><input type="checkbox" style="margin-right: 10px;" name="">4</p>
+                        <div class="form-group">
+                          <label>Jangka Waktu :</label>
+                          <select name="jangka_waktu" id="" class="form-control" >
+                              <option value="" disabled selected>Jangka Waktu</option>
+                              <option value="Bulanan">Bulanan</option>
+                              <option value="Tahunan">Tahunan</option>
+                            </select>
+                        </div>
+
+                      <div class="col-md-10">
+                        <input type="submit" class="btn btn-primary btn-block mt" value="Cari Kost">
+                      </div>
                     </div>
                 </div>
             </div>
@@ -137,12 +150,11 @@
             <div class="container-fluid">
                <!-- gallery -->
                <div class="col-md-10 " style="margin-top: 30px; text-align: center;">
-                <p>Berikut beberapa kost yang ada di sekitar DI. Pandjaitan</p>
                 <div class="jarak">
                 @foreach ($kost as $kosts)
                     <div class="col-md-4 kost">
-                        <a href="#">
-                          <img class="img-thumbnail" src="{{ url('images/'.$kosts->images)}}" alt="" style="height: 130px; width: 250px; border-radius: 8px 8px 0 0; background-color: white;" >
+                        <a href="{{ url('/kost/'.$kosts->slug) }}">
+                          <img class="img-thumbnail" src="{{ url('cover/'.$kosts->images)}}" alt="" style="height: 130px; width: 250px; border-radius: 8px 8px 0 0; background-color: white;" >
                       </a>
                       <div class="harga">
                       <span>Rp</span>
@@ -154,12 +166,14 @@
                         <h5>{{ $kosts->alamat }}</h5> 
                       </div>
                     </div>
-                                    @endforeach
+                @endforeach
                 </div>
               </div>
               <div class="row">
+              <div class="container-fluid"> 
               <hr>
               {!! $kost->links() !!}
+              </div>
               </div>
 <!-- gallery -->
           </div>

@@ -7,7 +7,7 @@
               <div class="col-md-10">
               <h3 class="box-title">Rutes Data</h3>
               </div>
-              <div class="col-md-2"><a class="btn btn-primary" href="{{ route('kost.create') }}">Buat Kost</a></div>
+              <div class="col-md-2"><a class="btn btn-primary" href="{{ url('/admin/kost/create') }}">Buat Kost</a></div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -41,7 +41,7 @@
                     <td>{{$kosts->panjang}} X {{$kosts->lebar}}</td>
                     <td>{{$kosts->sisa_kamar}} / {{$kosts->jumlah_kamar}}</td>
                     <td>
-                    <img src="{{ url('images/'.$kosts->images)}}" id="showimages" style="max-width:100px;max-height:50px;float:left;">
+                    <img src="{{ url('cover/'.$kosts->images)}}" id="showimages" style="max-width:100px;max-height:50px;float:left;">
                     </td>
                     <td>{{$kosts->deskripsi}}</td>
                   <td>

@@ -135,7 +135,7 @@
 			 <p>Reach Us</p>
 			 <div class="info">
 			 	<div class="inf">
-			 		<p><img src="{{ asset('img/loc.png') }}" style="padding-right: 10px;">Jl. Kauman Lama Gg.III No.19</p>
+			 		<p><img src="{{ asset('img/loc.png') }}" style="padding-right: 10px;">SMK Telkom Purwokerto</p>
 			 	</div>
 			 	<div class="inf" style="padding-top: 10px">
 			 		<p><img src="img/mail.png" style="padding-right: 10px;">team5rpl@gmail.com</p>
@@ -145,10 +145,10 @@
 			 	</div>
 			 </div>
 			 <div class="socmed">
-			 	<a href="#"><img src="asset/img/fb.png"></a>
-			 	<a href="#"><img src="asset/img/twitter.png"></a>
-			 	<a href="#"><img src="asset/img/ig.png"></a>
-			 	<a href="#"><img src="asset/img/google+.png"></a>
+			 	<a href="#"><img src="{{ asset('img/fb.png')}}"></a>
+			 	<a href="#"><img src="{{ asset('img/twitter.png')}}"></a>
+			 	<a href="#"><img src="{{ asset('img/ig.png')}}"></a>
+			 	<a href="#"><img src="{{ asset('img/google+.png')}}"></a>
 			 </div>
 		</div>
 		</div>

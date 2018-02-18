@@ -5,6 +5,22 @@
 	<section class="col-lg-12 connectedSortable">
 <div class="col-md-12">
           <div class="box">
+          @if (count($errors) > 0)
+      <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
+
+        @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div> 
+        @endif
             <div class="box-header with-border">
               <h3 class="box-title">Input Data Kost</h3>
             </div>
@@ -74,7 +90,7 @@
 						</div>
 
 						<div class="form-group col-xs-12 col-sm-12 col-md-12">
-		                  <label class="col-md-2">Fasilitas</label>
+		                  <label class="col-md-2">Fasilitas :</label>
 		                  <div class="col-md-8">
 		                  <textarea class="form-control" rows="3" placeholder="Masukkan fasilitas" name="fasilitas"></textarea>
 		                  </div>
@@ -113,26 +129,31 @@
 							<label for="harga" class="col-md-4">Tipe Kost :</label>
 							<div class="col-md-8">
 							<select name="tipe" id="" class="form-control" >
-									<option value="" disabled selected>Pria/Wanita</option>
+									<option value="" disabled selected>Tipe Kost</option>
 									<option value="Pria">Pria</option>
 									<option value="Wanita">Wanita</option>
+									<option value="Wanita & Wanita">Pria & Wanita</option>
 								</select>
 							</div>
 						</div>
 						</div>
 
 						<div class="form-group col-xs-12 col-sm-12 col-md-12">
-		                  <label class="col-md-2">Gambar</label>
-		                  <div class="col-md-4">
-		                  <img src="http://placehold.it/100x100" id="showimages" style="max-width:200px;max-height:200px;float:left;"/>
-		                  </div>
-		                  <div class="col-md-8">
-		                 	<input type="file" name="images" id="inputimages">
+		                  <label class="col-md-2">Cover :</label>
+		                  <div class="col-md-5">
+		                 	<input type="file" name="cover">
 		                  </div>
 	                	</div>
 
 						<div class="form-group col-xs-12 col-sm-12 col-md-12">
-		                  <label class="col-md-2">Deskripsi</label>
+		                  <label class="col-md-2">Gambar :</label>
+		                  <div class="col-md-5">
+		                 	<input type="file" name="images[]" multiple>
+		                  </div>
+	                	</div>
+
+						<div class="form-group col-xs-12 col-sm-12 col-md-12">
+		                  <label class="col-md-2">Deskripsi :</label>
 		                  <div class="col-md-8">
 		                  <textarea class="form-control" rows="3" placeholder="Masukkan deskripsi" name="deskripsi"></textarea>
 		                  </div>
@@ -153,5 +174,22 @@
             <!-- /.box-body -->
           </div>
         </div>
+        <script type="text/javascript">
+
+
+    $(document).ready(function() {
+
+      $(".btn-success").click(function(){ 
+          var html = $(".clone").html();
+          $(".increment").after(html);
+      });
+
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".control-group").remove();
+      });
+
+    });
+
+</script>
 </section>
 @endsection

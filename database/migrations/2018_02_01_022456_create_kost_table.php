@@ -20,15 +20,16 @@ class CreateKostTable extends Migration
             $table->integer('nohp');
             $table->text('alamat');
             $table->integer('harga');
-            $table->enum('tipe', ['Pria','Wanita']);
+            $table->enum('tipe', ['Pria','Wanita','Pria & Wanita']);
             $table->text('fasilitas');
             $table->enum('jangka_waktu', ['Bulanan','Tahunan']);
             $table->integer('panjang');
             $table->integer('lebar');
             $table->integer('sisa_kamar');
             $table->integer('jumlah_kamar');
-            $table->string('images')->nullabel();
+            $table->string('images')->nullabel()->default('kost.JPG');
             $table->string('deskripsi');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

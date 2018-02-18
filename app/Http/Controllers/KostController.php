@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kost;
-use Image;
+use App\Image;
+use App\Kost_Images;
+use Images;
 
 class KostController extends Controller
 {
@@ -46,37 +48,74 @@ class KostController extends Controller
     {
 
         $this->validate($request, [
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
 
-        'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg,JPG',
+        
 
-    ]);
+         if($request->hasFile('cover')){
+            $cover = $request->file('cover');
+            $filename = time() . '.' . $cover->getClientOriginalExtension();
+            $location = public_path('cover/' . $filename);
+            Images::make($cover)->resize(800, 400)->save($location);
 
-            $kost = new Kost();
-        $kost->nama = $request->get('nama');
-        $kost->nama_pemilik = $request->get('nama_pemilik');
-        $kost->nohp = $request->get('nohp');
-        $kost->alamat = $request->get('alamat');
-        $kost->harga = $request->get('harga');
-        $kost->tipe = $request->get('tipe');
-        $kost->fasilitas = $request->get('fasilitas');
-        $kost->jangka_waktu = $request->get('jangka_waktu');
-        $kost->panjang = $request->get('panjang');
-        $kost->lebar = $request->get('lebar');
-        $kost->sisa_kamar = $request->get('sisa_kamar');
-        $kost->jumlah_kamar = $request->get('jumlah_kamar');
-        $kost->deskripsi = $request->get('deskripsi');
-
-       if($request->hasFile('images')){
-            $images = $request->file('images');
-            $filename = time() . '.' . $images->getClientOriginalExtension();
-            $location = public_path('images/' . $filename);
-            Image::make($images)->resize(800, 400)->save($location);
-
-            $kost->images = $filename;
+            $kost = Kost::create([
+            'nama' => $request->get('nama'),
+            'nama_pemilik' => $request->get('nama_pemilik'),
+            'nohp' => $request->get('nohp'),
+            'alamat' => $request->get('alamat'),
+            'harga' => $request->get('harga'),
+            'tipe' => $request->get('tipe'),
+            'fasilitas' => $request->get('fasilitas'),
+            'jangka_waktu' => $request->get('jangka_waktu'),
+            'panjang' => $request->get('panjang'),
+            'lebar' => $request->get('lebar'),
+            'sisa_kamar' => $request->get('sisa_kamar'),
+            'jumlah_kamar' => $request->get('jumlah_kamar'),
+            'deskripsi' => $request->get('deskripsi'),
+            'slug' => str_slug($request->get('nama') ),
+            'images' => $filename
+            ]);
         }
+
+       $images = $request->file('images');
+
+       foreach($images as $image)
+       {
+        $move = $image->move(public_path().'/images/', $image->getClientOriginalName());
+
+        if($move)
+        {
+            
+            $kost_image = Kost_Images::create([
+                'kost_id' => $kost->id,
+                'filename' => $image->getClientOriginalName()
+                ]);
+        }
+       }
+       return redirect('admin/kost/');
+
+
+        /**
+       if($request->hasfile('images'))
+         {
+
+            foreach($request->file('images') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);  
+                $data[] = $name;  
+            }
+         }
+
+         $kost->images=json_encode($data);
+
             $kost->save();
 
                 return redirect('admin/kost/');
+
+            */
 
     }
 
