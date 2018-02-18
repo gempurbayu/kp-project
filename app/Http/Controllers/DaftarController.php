@@ -16,29 +16,33 @@ class DaftarController extends Controller
      */
     public function index()
     {
-        $kost = Kost::Latest()->paginate(3);
+        $kost = Kost::Latest()->paginate(5);
         //page heading
         //return to our view
         return view('pages.welcome',compact('kost'))->with([
      'kost' => $kost]);
     }
 
-    public function lihat($id)
-    {
-                $kost_id = Kost::find($id);
-        $images = Kost_Images::where('kost_id','like','%'.$kost_id.'%');
-        return view('pages.showkost',compact('images'))->with([
-     'kost' => $kost])->with(['images' => $images]);
-    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function cari(Request $request)
     {
-        //
+        $hargamax=$request->hargamax;
+        $hargamin=$request->hargamin;
+        $tipe=$request->tipe;
+        $jangka_waktu=$request->jangka_waktu; 
+
+        $kost = Kost::Where('harga','<=', $hargamax)
+        ->Where('harga','>=', $hargamin)
+        ->Where('tipe','like', '%'.$tipe.'%')
+        ->Where('jangka_waktu','like', '%'.$jangka_waktu.'%')
+        ->paginate(4);
+
+        return view('pages.cari',compact('kost'));
     }
 
     /**

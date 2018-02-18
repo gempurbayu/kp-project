@@ -17,8 +17,10 @@ return redirect('/');
 
 });
 
-Route::get('/', 'DaftarController@Index');
-
+Route::get('/kosts', 'DaftarController@Index');
+Route::get('/kosts/cari/', 'DaftarController@Cari')->name('daftar.cari');
+Route::get('/kosts/cari2/', 'HomeController@Cari')->name('home.cari');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/kost/{slug}/', 'DaftarController@show')->where('slug', '[A-Za-z0-9-_]+');
 
 Route::get('/lihat', 'DaftarController@Lihat');
@@ -29,11 +31,9 @@ Route::get('contact', 'PagesController@getContact');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/kost/create', 'KostController@create');
 Route::post('/admin/kost/create', 'KostController@store');
 Route::get('/admin/kost', 'KostController@index');
-Route::get('/landing', 'HomeController@index')->name('home');
 Route::resource('kost', 'KostController');
 
 Route::get('/admin', 'KostController@index')->name('home');

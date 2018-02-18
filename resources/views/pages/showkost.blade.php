@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index.html" style="color: white;">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="listkost.html" style="color: white;">List Kost</a></li>
+                    <li><a href="listkost.html" style="color: white;">Daftar Kost</a></li>
                     <li><a href="#" style="color: white;">Tentang Kami</a></li>
                     @guest
                     @else

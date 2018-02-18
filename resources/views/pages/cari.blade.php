@@ -3,6 +3,7 @@
 @section('content')
             <div class="container-fluid">
                <!-- gallery -->
+               <h4>Hasil Pencarian :</h4>
                <div class="col-md-10 " style="margin-top: 30px; text-align: center;">
                 <div class="jarak">
                 @foreach ($kost as $kosts)

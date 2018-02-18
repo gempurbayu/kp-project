@@ -24,8 +24,8 @@
     </div>
     <ul class="nav navbar-nav navbar-right list">
       <li><a href="#">Home</a></li>
-      <li><a href="#">List Kost</a></li>
-      <li><a href="#">About Us</a></li>
+      <li><a href="{{ url('/kosts') }}">Daftar Kost</a></li>
+      <li><a href="#">Tentang Kami</a></li>
     </ul>
   </div>
 	</nav>
@@ -34,20 +34,19 @@
 		<div class="ki">Solusi Mudah Cari Kost</div>
 	</div>
 	<div class="search">
+	<form action="{{ route('home.cari') }}" method="get">
 		<div class="searchbox">
 			<input type="text" name="search" placeholder="Masukkan Nama / Alamat / Pemilik Kost yang anda cari"></input>
 		</div>
 		<div class="button-src">
 		<div class="row">
-			<div class="col-sm-6 text-right cari">
-			<input class="cari" type="submit" name="cari" value="Cari">
-			</div>
-			<div class="col-sm-6 text-left filter">
-			<input class="filter" type="submit" name="filter" value="Filter">
+			<div class="col-sm-12 text-center cari">
+			<input class="cari" type="submit" value="Cari">
 			</div>
 		</div>
+		</div>
+	</form>
 	</div> 
-	</div>
 </div>
 <div id="content" class="row">
 	<div class="container">
@@ -148,7 +147,7 @@
 			 	<a href="#"><img src="{{ asset('img/fb.png')}}"></a>
 			 	<a href="#"><img src="{{ asset('img/twitter.png')}}"></a>
 			 	<a href="#"><img src="{{ asset('img/ig.png')}}"></a>
-			 	<a href="#"><img src="{{ asset('img/google+.png')}}"></a>
+			 	<a href="#"><img src="{{ asset('img/google.png')}}"></a>
 			 </div>
 		</div>
 		</div>

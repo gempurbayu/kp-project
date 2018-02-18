@@ -132,7 +132,7 @@
 									<option value="" disabled selected>Tipe Kost</option>
 									<option value="Pria">Pria</option>
 									<option value="Wanita">Wanita</option>
-									<option value="Wanita & Wanita">Pria & Wanita</option>
+									<option value="Pria & Wanita">Pria & Wanita</option>
 								</select>
 							</div>
 						</div>
